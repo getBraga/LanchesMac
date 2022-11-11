@@ -1,0 +1,13 @@
+{
+    "name": "lanchesmac",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "scripts": {
+        "dev": "dotnet run"
+    },
+    "devDependencies": {
+        "cypress": "^11.0.0"
+    }
+}
