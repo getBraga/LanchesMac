@@ -58,13 +58,17 @@
         </div>
     </div>
     <br />
-    <div class="row">
-        <div class="form-group col-md-2">
+
+    <div style="display: flex;">
+        <div >
             <input class="btn btn-success" type="submit" value="Concluir Pedido"/>
         </div>
-        &nbsp;
-        <div class="form-group col-md-2">
+         <div style="margin-left: 40px;">
             <a class="btn btn-outline-info" asp-controller="CarrinhoCompra" asp-action="Index">Retornar ao Carrinho</a>
         </div>
+        
+      
+       @* &nbsp;*@
+       
     </div>
 </form>
