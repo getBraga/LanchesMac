@@ -4,7 +4,7 @@ namespace LanchesMac.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Informe o nome")]
+        [Required(ErrorMessage = "Informe o Nome")]
         [Display(Name ="Usuário")]
         public string UserName { get; set; }
         
@@ -12,7 +12,7 @@ namespace LanchesMac.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Senha")]
         public string Password { get; set; }
-
+    
         public string ReturnUrl { get; set; }
     }
 }
