@@ -41,6 +41,10 @@ namespace LanchesMac.Migrations
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    Endereco = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Numero = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Cep = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
