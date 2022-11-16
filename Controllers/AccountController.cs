@@ -8,10 +8,10 @@ namespace LanchesMac.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationIdentityUser> _userManager;
+        private readonly SignInManager<ApplicationIdentityUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<ApplicationIdentityUser> userManager, SignInManager<ApplicationIdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -64,7 +64,7 @@ namespace LanchesMac.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = registroVM.UserName };
+                var user = new ApplicationIdentityUser { UserName = registroVM.UserName, Endereco = registroVM.Endereco, Cep  = registroVM.Endereco , Estado = registroVM.Endereco , Numero = registroVM.Endereco, Cidade = registroVM.Endereco, Pais = registroVM.Endereco };
                 var result = await _userManager.CreateAsync(user, registroVM.Password);
                 if(result.Succeeded)
                 {
