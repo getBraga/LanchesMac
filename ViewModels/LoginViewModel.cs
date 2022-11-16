@@ -8,7 +8,7 @@ namespace LanchesMac.ViewModels
         [Display(Name ="Usuário")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Informe o Endereço")]
+        
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }
 
