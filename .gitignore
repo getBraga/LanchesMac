@@ -3,6 +3,7 @@
 project.lock.json
 package-lock
 package.lock.json
+node_modules
 .DS_Store
 *.pyc
 nupkg/
