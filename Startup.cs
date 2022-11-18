@@ -2,6 +2,7 @@ using LanchesMac.Context;
 using LanchesMac.Models;
 using LanchesMac.Repositories;
 using LanchesMac.Repositories.Interfaces;
+using LanchesMac.Services;
 using LanchesMac.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,24 +26,34 @@ public class Startup
              .AddEntityFrameworkStores<AppDbContext>()
              .AddDefaultTokenProviders();
 
-        //services.Configure<IdentityOptions>(options =>
-        //{
-        //    // Default Password settings.
-        //    options.Password.RequireDigit = true;
-        //    options.Password.RequireLowercase = false;
-        //    options.Password.RequireNonAlphanumeric = false;
-        //    options.Password.RequireUppercase = false;
-        //    options.Password.RequiredLength = 3;
-        //    options.Password.RequiredUniqueChars = 1;
-        //});
+        services.Configure<IdentityOptions>(options =>
+        {
+            // Default Password settings.
+            //options.Password.RequireDigit = true;
+            options.User.AllowedUserNameCharacters = string.Empty;
+            //options.Password.RequireLowercase = false;
+            //options.Password.RequireNonAlphanumeric = false;
+            //options.Password.RequireUppercase = false;
+            //options.Password.RequiredLength = 3;
+            //options.Password.RequiredUniqueChars = 1;
+        });
 
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository, PedidoRepository>();
-
+        services.AddScoped<ISeedUserRoleInitital, SeedUserRoleInitial>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
-
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Admin",
+              politica =>
+              {
+                  politica.RequireRole("Admin");
+              });
+        
+        });
+            
         services.AddControllersWithViews();
 
         services.AddMemoryCache();
@@ -50,7 +61,7 @@ public class Startup
 
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISeedUserRoleInitital seedUserRoleInitital)
     {
         if (env.IsDevelopment())
         {
@@ -65,7 +76,11 @@ public class Startup
 
         app.UseStaticFiles();
         app.UseRouting();
+        // criar perfis
+        seedUserRoleInitital.SeedRoles();
 
+        // cria os usuarios e atruibui ao perfil
+        seedUserRoleInitital.SeedUsers();
         app.UseSession();
 
         app.UseAuthentication();
