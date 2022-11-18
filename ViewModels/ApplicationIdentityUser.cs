@@ -5,6 +5,7 @@ namespace LanchesMac.ViewModels
     public class ApplicationIdentityUser: IdentityUser
     {
         public string Endereco { get; set; }
+        public string Perfil { get; set; }
         public string Numero { get; set; }
         public string Estado { get; set; }
         public string Cidade { get; set; }
