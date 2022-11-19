@@ -64,7 +64,7 @@ namespace LanchesMac.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = new ApplicationIdentityUser { UserName = registroVM.UserName,Perfil= "Member" ,Endereco = registroVM.Endereco, Cep  = registroVM.Endereco , Estado = registroVM.Endereco , Numero = registroVM.Endereco, Cidade = registroVM.Endereco, Pais = registroVM.Endereco };
+                var user = new ApplicationIdentityUser { UserName = registroVM.UserName,Perfil= "Member" ,Endereco = registroVM.Endereco};
                 var result = await _userManager.CreateAsync(user, registroVM.Password);
                 if(result.Succeeded)
                 {
@@ -87,6 +87,10 @@ namespace LanchesMac.Controllers
             HttpContext.User = null;
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
