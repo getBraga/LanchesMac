@@ -6,6 +6,7 @@ using LanchesMac.Services;
 using LanchesMac.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 namespace LanchesMac;
 public class Startup
@@ -17,6 +18,7 @@ public class Startup
 
     public IConfiguration Configuration { get; }
 
+    [Obsolete]
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<AppDbContext>(options =>
@@ -55,7 +57,10 @@ public class Startup
         });
             
         services.AddControllersWithViews();
-
+        services.AddPaging(options => {
+            options.ViewName = "Bootstrap5";
+            options.PageParameterName = "pageindex";
+        });
         services.AddMemoryCache();
         services.AddSession();
 
